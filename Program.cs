@@ -3,11 +3,16 @@ using System;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.WriteLine("jADMIN - Add RUNASADMIN flag\n");
-        Console.WriteLine("Path of the exe (-r at the beginning to remove): ");
-        string exePath = Console.ReadLine().Replace("\"", "");
+        if (args.Length == 0)
+        {
+            Console.WriteLine("jADMIN - Add RUNASADMIN flag\n");
+            Console.WriteLine("Path of the exe (-r at the beginning to remove): ");
+        }
+        else if (args[0] == "-r" && args.Length > 1) args[0] += " " + args[1];
+
+        string exePath = (args.Length > 0) ? args[0].Replace("\"", "") : Console.ReadLine().Replace("\"", "");
         bool disable = exePath.Length > 3 && exePath.Substring(0, 2) == "-r";
 
         if (disable)
